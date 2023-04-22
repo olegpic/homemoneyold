@@ -2,12 +2,14 @@ package com.virtualpairprogrammers.servlet;
 
 import com.virtualpairprogrammers.data.DatabaseBootstrap;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+@WebServlet("/order")
 public class OrderServlet extends HttpServlet {
 
     private double orderTotal = 0.0;
