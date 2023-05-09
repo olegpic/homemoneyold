@@ -16,7 +16,10 @@
   ${incomes}
 </ul>
   <form method="post" action="\incomes">
-    <input name="name">
+    <input name="name" placeholder="Name">
+    <input name="description" placeholder="Description">
+    <input name="currency" placeholder="Currency">
+    <input name="amount" placeholder="Amount">
     <button>Add</button>
   </form>
 

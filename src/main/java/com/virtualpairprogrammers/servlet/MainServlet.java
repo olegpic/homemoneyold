@@ -1,6 +1,7 @@
 package com.virtualpairprogrammers.servlet;
 
 import com.virtualpairprogrammers.data.DefaultDAO;
+import com.virtualpairprogrammers.domain.Currency;
 import com.virtualpairprogrammers.domain.Income;
 import com.virtualpairprogrammers.domain.Outcome;
 
@@ -16,9 +17,9 @@ import java.util.List;
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 
-    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        DefaultDAO dao = new DefaultDAO();
+    private DefaultDAO dao = new DefaultDAO();
 
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         List<Income> incomes = dao.getIncomes();
         List<Outcome> outcomes = dao.getOutcomes();
 
@@ -36,5 +37,17 @@ public class MainServlet extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
         rd.forward(request, response);
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
+        List<Income> incomes = dao.getIncomes();
+        Income income = incomes.get(incomes.size() - 1);
+
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        Currency currency = Currency.valueOf(request.getParameter("currency"));
+        double amount = Double.parseDouble(request.getParameter("amount"));
+        Income newIncome = new Income(income.getId() + 1, name, description, currency, amount);
+        dao.addIncome(newIncome);
     }
 }

@@ -77,16 +77,7 @@ public class DatabaseBootstrap {
 
             List<Income> incomes = getIncomes();
             for (Income income : incomes) {
-                try (PreparedStatement preparedStatement = connection.prepareStatement(
-                        "INSERT INTO incomes (id, name, description, currency, amount) values (?,?,?,?,?);"
-                )) {
-                    preparedStatement.setInt(1, income.getId());
-                    preparedStatement.setString(2, income.getName());
-                    preparedStatement.setString(3, income.getDescription());
-                    preparedStatement.setString(4, income.getCurrency().toString());
-                    preparedStatement.setDouble(5, income.getAmount());
-                    preparedStatement.execute();
-                }
+                insertIncome(income);
             }
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(
@@ -111,6 +102,35 @@ public class DatabaseBootstrap {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void addIncome(Income income) {
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            insertIncome(income);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertIncome(Income income) throws SQLException {
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:~/homemoneyold", "", "")) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO incomes (id, name, description, currency, amount) values (?,?,?,?,?);"
+            )) {
+                preparedStatement.setInt(1, income.getId());
+                preparedStatement.setString(2, income.getName());
+                preparedStatement.setString(3, income.getDescription());
+                preparedStatement.setString(4, income.getCurrency().toString());
+                preparedStatement.setDouble(5, income.getAmount());
+                preparedStatement.execute();
+            }
         }
     }
 }
