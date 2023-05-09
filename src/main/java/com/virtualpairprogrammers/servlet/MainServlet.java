@@ -4,48 +4,37 @@ import com.virtualpairprogrammers.data.DefaultDAO;
 import com.virtualpairprogrammers.domain.Income;
 import com.virtualpairprogrammers.domain.Outcome;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 
-    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         DefaultDAO dao = new DefaultDAO();
 
         List<Income> incomes = dao.getIncomes();
         List<Outcome> outcomes = dao.getOutcomes();
 
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-        out.println("<html><body><h1>Incomes:</h1></body></html>");
-        out.println("<form method=\"get\" action=\"\\incomes\">");
-        out.println("<ul>");
+        StringBuilder incomesString = new StringBuilder();
         for (Income income : incomes) {
-            out.println(String.format("<li>%s<input type=\"text\" name=\"%s\"/></li>", income.getName(), income.getId()));
+            incomesString.append(String.format("<li>%s: %s (%s) - %s %s</li>\n", income.getId(), income.getName(), income.getDescription(), income.getAmount(), income.getCurrency()));
         }
-        out.println("</ul>");
-        out.println("<button>Add</button>");
-        out.println("</form");
-        out.println("</body></html>");
+        request.setAttribute("incomes", incomesString.toString());
 
-        out.println("</br>");
-
-        out.println("<html><body><h1>Outcomes:</h1></body></html>");
-        out.println("<form method=\"get\" action=\"\\incomes\">");
-        out.println("<ul>");
+        StringBuilder outcomesString = new StringBuilder();
         for (Outcome outcome : outcomes) {
-            out.println(String.format("<li>%s<input type=\"text\" name=\"%s\"/></li>", outcome.getName(), outcome.getId()));
+            outcomesString.append(String.format("<li>%s (%s): %s (%s) - %s %s</li>\n", outcome.getId(), outcome.getImportance(), outcome.getName(), outcome.getDescription(), outcome.getAmount(), outcome.getCurrency()));
         }
-        out.println("</ul>");
-        out.println("<button>Add</button>");
-        out.println("</form");
-        out.println("</body></html>");
-        out.close();
+        request.setAttribute("outcomes", outcomesString.toString());
+
+        RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
+        rd.forward(request, response);
     }
 }
