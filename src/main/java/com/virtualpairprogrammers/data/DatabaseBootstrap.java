@@ -41,7 +41,7 @@ public class DatabaseBootstrap {
         outcomes.add(new Outcome(id++, "Presents", "", Currency.USD, Importance.NORMAL, 102.04));
         outcomes.add(new Outcome(id++, "Taxi", "", Currency.USD, Importance.NORMAL, 3.57));
 
-        outcomes.add(new Outcome(id++, "Entertaimant", "", Currency.USD, Importance.LOW, 12.32));
+        outcomes.add(new Outcome(id++, "Entertainment", "", Currency.USD, Importance.LOW, 12.32));
         outcomes.add(new Outcome(id++, "Eating out", "", Currency.USD, Importance.LOW, 210.68));
         outcomes.add(new Outcome(id++, "Delivery", "", Currency.USD, Importance.LOW, 291.69));
         outcomes.add(new Outcome(id, "Travel", "", Currency.USD, Importance.LOW, 71.94));
@@ -75,8 +75,7 @@ public class DatabaseBootstrap {
                 preparedStatement.execute();
             }
 
-            List<Income> incomes = getIncomes();
-            for (Income income : incomes) {
+            for (Income income : getIncomes()) {
                 insertIncome(income);
             }
 
@@ -86,19 +85,8 @@ public class DatabaseBootstrap {
                 preparedStatement.execute();
             }
 
-            List<Outcome> outcomes = getOutcomes();
-            for (Outcome outcome : outcomes) {
-                try (PreparedStatement preparedStatement = connection.prepareStatement(
-                        "INSERT INTO outcomes (id, name, description, currency, importance, amount) values (?,?,?,?,?,?);"
-                )) {
-                    preparedStatement.setInt(1, outcome.getId());
-                    preparedStatement.setString(2, outcome.getName());
-                    preparedStatement.setString(3, outcome.getDescription());
-                    preparedStatement.setString(4, outcome.getCurrency().toString());
-                    preparedStatement.setString(5, outcome.getImportance().toString());
-                    preparedStatement.setDouble(6, outcome.getAmount());
-                    preparedStatement.execute();
-                }
+            for (Outcome outcome : getOutcomes()) {
+                insertOutcome(outcome);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -129,6 +117,36 @@ public class DatabaseBootstrap {
                 preparedStatement.setString(3, income.getDescription());
                 preparedStatement.setString(4, income.getCurrency().toString());
                 preparedStatement.setDouble(5, income.getAmount());
+                preparedStatement.execute();
+            }
+        }
+    }
+
+    public void addOutcome(Outcome outcome) {
+        try {
+            Class.forName("org.h2.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            insertOutcome(outcome);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void insertOutcome(Outcome outcome) throws SQLException {
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:~/homemoneyold", "", "")) {
+            try (PreparedStatement preparedStatement = connection.prepareStatement(
+                    "INSERT INTO outcomes (id, name, description, currency, importance, amount) values (?,?,?,?,?,?);"
+            )) {
+                preparedStatement.setInt(1, outcome.getId());
+                preparedStatement.setString(2, outcome.getName());
+                preparedStatement.setString(3, outcome.getDescription());
+                preparedStatement.setString(4, outcome.getCurrency().toString());
+                preparedStatement.setString(5, outcome.getImportance().toString());
+                preparedStatement.setDouble(6, outcome.getAmount());
                 preparedStatement.execute();
             }
         }

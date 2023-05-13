@@ -15,7 +15,7 @@
 <ul>
   ${incomes}
 </ul>
-  <form method="post" action="\incomes">
+  <form method="post" action="/incomes">
     <input name="name" placeholder="Name">
     <input name="description" placeholder="Description">
     <input name="currency" placeholder="Currency">
@@ -27,7 +27,12 @@
 <ul>
   <li>${outcomes}</li>
 </ul>
-<form method="post" action="\outcomes">
+<form method="post" action="/outcomes">
+  <input name="name" placeholder="Name">
+  <input name="description" placeholder="Description">
+  <input name="currency" placeholder="Currency">
+  <input name="importance" placeholder="Importance">
+  <input name="amount" placeholder="Amount">
   <button>Add</button>
 </form>
 </body>

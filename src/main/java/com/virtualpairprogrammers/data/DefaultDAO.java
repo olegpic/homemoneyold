@@ -50,6 +50,11 @@ public class DefaultDAO {
         bootstrap.addIncome(income);
     }
 
+    public void addOutcome(Outcome outcome) {
+        DatabaseBootstrap bootstrap = new DatabaseBootstrap();
+        bootstrap.addOutcome(outcome);
+    }
+
     private List<Income> buildIncomes(ResultSet results) throws SQLException {
         List<Income> incomes = new ArrayList<>();
         while (results.next()) {
