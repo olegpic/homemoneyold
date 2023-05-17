@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html>
 <head>
     <title>Title</title>
@@ -13,7 +14,9 @@
 <body>
 <h1>Incomes:</h1>
 <ul>
-  ${incomes}
+  <c:forEach items="${incomes}" var="income">
+    <li>${income}</li>
+  </c:forEach>
 </ul>
   <form method="post" action="/incomes">
     <input name="name" placeholder="Name">
@@ -25,7 +28,9 @@
 
 <h1>Outcomes:</h1>
 <ul>
-  <li>${outcomes}</li>
+  <c:forEach items="${outcomes}" var="outcome">
+    <li>${outcome}</li>
+  </c:forEach>
 </ul>
 <form method="post" action="/outcomes">
   <input name="name" placeholder="Name">
