@@ -45,6 +45,26 @@ public class DefaultDAO {
         return outcomes;
     }
 
+    public void updateOutcome(Outcome outcome) {
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            String sql = "" +
+                    "UPDATE outcomes " +
+                    "SET name = ?, description = ?, currency = ?, importance = ?, amount = ? " +
+                    "WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, outcome.getName());
+            preparedStatement.setString(2, outcome.getDescription());
+            preparedStatement.setString(3, outcome.getCurrency().name());
+            preparedStatement.setString(4, outcome.getImportance().name());
+            preparedStatement.setDouble(5, outcome.getAmount());
+            preparedStatement.setInt(6, outcome.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void addIncome(Income income){
         DatabaseBootstrap bootstrap = new DatabaseBootstrap();
         bootstrap.addIncome(income);

@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/outcomes")
-public class OutcomeServlet extends HttpServlet {
+public class SaveOutcomeServlet extends HttpServlet {
 
     private DefaultDAO dao = new DefaultDAO();
     private ServletHelper helper = new ServletHelper();
