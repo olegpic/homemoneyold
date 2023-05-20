@@ -58,14 +58,23 @@
 <script>
   function updateIncome(id, name, description, currency, amount) {
     var request = new XMLHttpRequest();
-    var url = 'incomesUpdate?id=' + id + '&name=' + name + '&description=' + description + '&currency=' + currency + '&amount=' + amount;
-    request.open("PUT", url);
+    request.open("PUT", "incomesUpdate");
+    request.setRequestHeader("Content-Type", "application/json");
+
+    var data = {
+      id: id,
+      name: name,
+      description: description,
+      currency: currency,
+      amount: amount
+    }
+
     request.onreadystatechange = function (){
       if(this.readyState === XMLHttpRequest.DONE){
         console.log(this.readyState);
       }
     }
-    request.send();
+    request.send(JSON.stringify(data));
   }
 </script>
 </html>

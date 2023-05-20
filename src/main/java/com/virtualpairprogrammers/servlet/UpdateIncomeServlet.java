@@ -1,32 +1,44 @@
 package com.virtualpairprogrammers.servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.virtualpairprogrammers.data.DefaultDAO;
-import com.virtualpairprogrammers.domain.Currency;
 import com.virtualpairprogrammers.domain.Income;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 @WebServlet("/incomesUpdate")
 public class UpdateIncomeServlet extends HttpServlet {
 
     private DefaultDAO dao = new DefaultDAO();
+    private ObjectMapper objectMapper = new ObjectMapper();
 
-    public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+    public void doPut(HttpServletRequest request, HttpServletResponse response) {
+        Income income;
+        try (BufferedReader reader = request.getReader()) {
+            StringBuilder requestBody = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                requestBody.append(line);
+            }
+            income = objectMapper.readValue(requestBody.toString(), Income.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         Income oldIncome = dao.findAllIncomes().stream()
-                .filter(income -> income.getId() == id)
+                .filter(i -> i.getId() == income.getId())
                 .findFirst().orElse(null);
 
         if (oldIncome != null) {
-            oldIncome.setName(request.getParameter("name"));
-            oldIncome.setDescription(request.getParameter("description"));
-            oldIncome.setCurrency(Currency.valueOf(request.getParameter("currency")));
-            oldIncome.setAmount(Double.parseDouble(request.getParameter("amount")));
+            oldIncome.setName(income.getName());
+            oldIncome.setDescription(income.getDescription());
+            oldIncome.setCurrency(income.getCurrency());
+            oldIncome.setAmount(income.getAmount());
         }
 
         dao.updateIncome(oldIncome);
