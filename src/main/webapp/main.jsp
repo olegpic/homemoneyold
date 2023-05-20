@@ -9,23 +9,29 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Main</title>
 </head>
 <body>
 <h1>Incomes:</h1>
 <ul>
   <c:forEach items="${incomes}" var="income">
-    <li>${income}</li>
+    <form method="post" action="incomesUpdate">
+      <input name="id" value="${income.id}" type="hidden">
+      <input name="name" value="${income.name}" placeholder="Name">
+      <input name="description" value="${income.description}" placeholder="Description">
+      <input name="currency" value="${income.currency}" placeholder="Currency">
+      <input name="amount" value="${income.amount}" placeholder="Amount">
+      <button>Update</button>
+    </form>
   </c:forEach>
 </ul>
-  <form method="post" action="/incomes">
-    <input name="name" placeholder="Name">
-    <input name="description" placeholder="Description">
-    <input name="currency" placeholder="Currency">
-    <input name="amount" placeholder="Amount">
-    <button>Add</button>
-  </form>
-
+<form method="post" action="incomes">
+  <input name="name" placeholder="Name">
+  <input name="description" placeholder="Description">
+  <input name="currency" placeholder="Currency">
+  <input name="amount" placeholder="Amount">
+  <button>Add</button>
+</form>
 <h1>Outcomes:</h1>
 <ul>
   <c:forEach items="${outcomes}" var="outcome">
@@ -40,7 +46,7 @@
     </form>
   </c:forEach>
 </ul>
-<form method="post" action="/outcomes">
+<form method="post" action="outcomes">
   <input name="name" placeholder="Name">
   <input name="description" placeholder="Description">
   <input name="currency" placeholder="Currency">

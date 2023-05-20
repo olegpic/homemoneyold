@@ -82,6 +82,25 @@ public class DefaultDAO {
         }
     }
 
+    public void updateIncome(Income income) {
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            String sql = "" +
+                    "UPDATE incomes " +
+                    "SET name = ?, description = ?, currency = ?, amount = ? " +
+                    "WHERE id = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, income.getName());
+            preparedStatement.setString(2, income.getDescription());
+            preparedStatement.setString(3, income.getCurrency().name());
+            preparedStatement.setDouble(4, income.getAmount());
+            preparedStatement.setInt(5, income.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void updateOutcome(Outcome outcome) {
         try (Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
             String sql = "" +

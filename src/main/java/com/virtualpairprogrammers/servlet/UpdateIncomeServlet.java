@@ -12,25 +12,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/incomes")
-public class IncomeServlet extends HttpServlet {
+@WebServlet("/incomesUpdate")
+public class UpdateIncomeServlet extends HttpServlet {
 
     private DefaultDAO dao = new DefaultDAO();
     private ServletHelper helper = new ServletHelper();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Income> incomes = dao.findAllIncomes();
-        Income income = incomes.get(incomes.size() - 1);
+        int id = Integer.parseInt(request.getParameter("id"));
+        Income oldIncome = dao.findAllIncomes().stream()
+                .filter(income -> income.getId() == id)
+                .findFirst().orElse(null);
 
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        Currency currency = Currency.valueOf(request.getParameter("currency"));
-        double amount = Double.parseDouble(request.getParameter("amount"));
-        Income newIncome = new Income(income.getId() + 1, name, description, currency, amount);
-        dao.saveIncome(newIncome);
+        if (oldIncome != null) {
+            oldIncome.setName(request.getParameter("name"));
+            oldIncome.setDescription(request.getParameter("description"));
+            oldIncome.setCurrency(Currency.valueOf(request.getParameter("currency")));
+            oldIncome.setAmount(Double.parseDouble(request.getParameter("amount")));
+        }
 
+        dao.updateIncome(oldIncome);
         helper.populateModel(request);
 
         RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
