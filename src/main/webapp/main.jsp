@@ -15,14 +15,13 @@
 <h1>Incomes:</h1>
 <ul>
   <c:forEach items="${incomes}" var="income">
-    <form method="post" action="incomesUpdate">
-      <input name="id" value="${income.id}" type="hidden">
+    <p>
       <input name="name" value="${income.name}" placeholder="Name">
       <input name="description" value="${income.description}" placeholder="Description">
       <input name="currency" value="${income.currency}" placeholder="Currency">
       <input name="amount" value="${income.amount}" placeholder="Amount">
-      <button>Update</button>
-    </form>
+      <button onclick="updateIncome('${income.id}', '${income.name}', '${income.description}', '${income.currency}', '${income.amount}')">Update</button>
+    </p>
   </c:forEach>
 </ul>
 <form method="post" action="incomes">
@@ -55,4 +54,18 @@
   <button>Add</button>
 </form>
 </body>
+
+<script>
+  function updateIncome(id, name, description, currency, amount) {
+    var request = new XMLHttpRequest();
+    var url = 'incomesUpdate?id=' + id + '&name=' + name + '&description=' + description + '&currency=' + currency + '&amount=' + amount;
+    request.open("PUT", url);
+    request.onreadystatechange = function (){
+      if(this.readyState === XMLHttpRequest.DONE){
+        console.log(this.readyState);
+      }
+    }
+    request.send();
+  }
+</script>
 </html>

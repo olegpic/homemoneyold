@@ -57,8 +57,4 @@ public class Income {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-
-    public String toString() {
-        return (this.name + " (" + this.amount + ")");
-    }
 }

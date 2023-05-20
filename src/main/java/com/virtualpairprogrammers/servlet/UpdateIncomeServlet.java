@@ -3,9 +3,7 @@ package com.virtualpairprogrammers.servlet;
 import com.virtualpairprogrammers.data.DefaultDAO;
 import com.virtualpairprogrammers.domain.Currency;
 import com.virtualpairprogrammers.domain.Income;
-import com.virtualpairprogrammers.helper.ServletHelper;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +15,8 @@ import java.io.IOException;
 public class UpdateIncomeServlet extends HttpServlet {
 
     private DefaultDAO dao = new DefaultDAO();
-    private ServletHelper helper = new ServletHelper();
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Income oldIncome = dao.findAllIncomes().stream()
                 .filter(income -> income.getId() == id)
@@ -33,9 +30,5 @@ public class UpdateIncomeServlet extends HttpServlet {
         }
 
         dao.updateIncome(oldIncome);
-        helper.populateModel(request);
-
-        RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
-        rd.forward(request, response);
     }
 }
