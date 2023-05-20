@@ -10,8 +10,8 @@ public class ServletHelper {
 
     public void populateModel(HttpServletRequest request) {
         request.setAttribute("income", "TestIncomeValue");
-        request.setAttribute("incomes", dao.getIncomes());
-        request.setAttribute("outcomes", dao.getOutcomes());
+        request.setAttribute("incomes", dao.findAllIncomes());
+        request.setAttribute("outcomes", dao.findAllOutcomes());
         request.setAttribute("outcome", "TestOutcomeValue");
     }
 }

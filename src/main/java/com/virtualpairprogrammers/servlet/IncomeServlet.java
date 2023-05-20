@@ -21,7 +21,7 @@ public class IncomeServlet extends HttpServlet {
     private ServletHelper helper = new ServletHelper();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Income> incomes = dao.getIncomes();
+        List<Income> incomes = dao.findAllIncomes();
         Income income = incomes.get(incomes.size() - 1);
 
         String name = request.getParameter("name");
@@ -29,7 +29,7 @@ public class IncomeServlet extends HttpServlet {
         Currency currency = Currency.valueOf(request.getParameter("currency"));
         double amount = Double.parseDouble(request.getParameter("amount"));
         Income newIncome = new Income(income.getId() + 1, name, description, currency, amount);
-        dao.addIncome(newIncome);
+        dao.saveIncome(newIncome);
 
         helper.populateModel(request);
 

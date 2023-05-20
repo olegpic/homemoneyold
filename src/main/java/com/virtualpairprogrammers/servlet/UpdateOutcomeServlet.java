@@ -22,7 +22,7 @@ public class UpdateOutcomeServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Outcome oldOutcome = dao.getOutcomes().stream()
+        Outcome oldOutcome = dao.findAllOutcomes().stream()
                 .filter(outcome -> outcome.getId() == id)
                 .findFirst().orElse(null);
 

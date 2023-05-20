@@ -22,7 +22,7 @@ public class SaveOutcomeServlet extends HttpServlet {
     private ServletHelper helper = new ServletHelper();
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Outcome> outcomes = dao.getOutcomes();
+        List<Outcome> outcomes = dao.findAllOutcomes();
         Outcome outcome = outcomes.get(outcomes.size() - 1);
 
         String name = request.getParameter("name");
@@ -31,7 +31,7 @@ public class SaveOutcomeServlet extends HttpServlet {
         Importance importance = Importance.valueOf(request.getParameter("importance"));
         double amount = Double.parseDouble(request.getParameter("amount"));
         Outcome newOutcome = new Outcome(outcome.getId() + 1, name, description, currency, importance, amount);
-        dao.addOutcome(newOutcome);
+        dao.saveOutcome(newOutcome);
 
         helper.populateModel(request);
 
