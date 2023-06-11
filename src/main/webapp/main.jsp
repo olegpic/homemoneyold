@@ -35,45 +35,24 @@
 <h1>Outcomes:</h1>
 <ul>
   <h3>High importance</h3>
-  <c:forEach items="${outcomes}" var="outcome">
-    <c:if test="${outcome.importance eq 'HIGH'}">
-      <form method="post" action="outcomesUpdate">
-        <input name="id" value="${outcome.id}" type="hidden">
-        <input name="name" value="${outcome.name}" placeholder="Name">
-        <input name="description" value="${outcome.description}" placeholder="Description">
-        <input name="currency" value="${outcome.currency}" placeholder="Currency">
-        <input name="importance" value="${outcome.importance}" placeholder="Importance">
-        <input name="amount" value="${outcome.amount}" placeholder="Amount">
-        <button>Update</button>
-      </form>
+  <c:forEach items="${outcomes}" var="item">
+    <c:if test="${item.importance eq 'HIGH'}">
+      <c:set var="outcome" value="${item}" scope="request"/>
+      <jsp:include page="include/outcome.jsp"/>
     </c:if>
   </c:forEach>
   <h3>Normal importance</h3>
-  <c:forEach items="${outcomes}" var="outcome">
-    <c:if test="${outcome.importance eq 'NORMAL'}">
-      <form method="post" action="outcomesUpdate">
-        <input name="id" value="${outcome.id}" type="hidden">
-        <input name="name" value="${outcome.name}" placeholder="Name">
-        <input name="description" value="${outcome.description}" placeholder="Description">
-        <input name="currency" value="${outcome.currency}" placeholder="Currency">
-        <input name="importance" value="${outcome.importance}" placeholder="Importance">
-        <input name="amount" value="${outcome.amount}" placeholder="Amount">
-        <button>Update</button>
-      </form>
+  <c:forEach items="${outcomes}" var="item">
+    <c:if test="${item.importance eq 'NORMAL'}">
+      <c:set var="outcome" value="${item}" scope="request"/>
+      <jsp:include page="include/outcome.jsp"/>
     </c:if>
   </c:forEach>
   <h3>Low importance</h3>
-  <c:forEach items="${outcomes}" var="outcome">
-    <c:if test="${outcome.importance eq 'LOW'}">
-      <form method="post" action="outcomesUpdate">
-        <input name="id" value="${outcome.id}" type="hidden">
-        <input name="name" value="${outcome.name}" placeholder="Name">
-        <input name="description" value="${outcome.description}" placeholder="Description">
-        <input name="currency" value="${outcome.currency}" placeholder="Currency">
-        <input name="importance" value="${outcome.importance}" placeholder="Importance">
-        <input name="amount" value="${outcome.amount}" placeholder="Amount">
-        <button>Update</button>
-      </form>
+  <c:forEach items="${outcomes}" var="item">
+    <c:if test="${item.importance eq 'LOW'}">
+      <c:set var="outcome" value="${item}" scope="request"/>
+      <jsp:include page="include/outcome.jsp"/>
     </c:if>
   </c:forEach>
 </ul>
