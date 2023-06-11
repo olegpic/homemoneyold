@@ -24,6 +24,7 @@
     </p>
   </c:forEach>
 </ul>
+<h3>Add new</h3>
 <form method="post" action="incomes">
   <input name="name" placeholder="Name">
   <input name="description" placeholder="Description">
@@ -33,18 +34,50 @@
 </form>
 <h1>Outcomes:</h1>
 <ul>
+  <h3>High importance</h3>
   <c:forEach items="${outcomes}" var="outcome">
-    <form method="post" action="outcomesUpdate">
-      <input name="id" value="${outcome.id}" type="hidden">
-      <input name="name" value="${outcome.name}" placeholder="Name">
-      <input name="description" value="${outcome.description}" placeholder="Description">
-      <input name="currency" value="${outcome.currency}" placeholder="Currency">
-      <input name="importance" value="${outcome.importance}" placeholder="Importance">
-      <input name="amount" value="${outcome.amount}" placeholder="Amount">
-      <button>Update</button>
-    </form>
+    <c:if test="${outcome.importance eq 'HIGH'}">
+      <form method="post" action="outcomesUpdate">
+        <input name="id" value="${outcome.id}" type="hidden">
+        <input name="name" value="${outcome.name}" placeholder="Name">
+        <input name="description" value="${outcome.description}" placeholder="Description">
+        <input name="currency" value="${outcome.currency}" placeholder="Currency">
+        <input name="importance" value="${outcome.importance}" placeholder="Importance">
+        <input name="amount" value="${outcome.amount}" placeholder="Amount">
+        <button>Update</button>
+      </form>
+    </c:if>
+  </c:forEach>
+  <h3>Normal importance</h3>
+  <c:forEach items="${outcomes}" var="outcome">
+    <c:if test="${outcome.importance eq 'NORMAL'}">
+      <form method="post" action="outcomesUpdate">
+        <input name="id" value="${outcome.id}" type="hidden">
+        <input name="name" value="${outcome.name}" placeholder="Name">
+        <input name="description" value="${outcome.description}" placeholder="Description">
+        <input name="currency" value="${outcome.currency}" placeholder="Currency">
+        <input name="importance" value="${outcome.importance}" placeholder="Importance">
+        <input name="amount" value="${outcome.amount}" placeholder="Amount">
+        <button>Update</button>
+      </form>
+    </c:if>
+  </c:forEach>
+  <h3>Low importance</h3>
+  <c:forEach items="${outcomes}" var="outcome">
+    <c:if test="${outcome.importance eq 'LOW'}">
+      <form method="post" action="outcomesUpdate">
+        <input name="id" value="${outcome.id}" type="hidden">
+        <input name="name" value="${outcome.name}" placeholder="Name">
+        <input name="description" value="${outcome.description}" placeholder="Description">
+        <input name="currency" value="${outcome.currency}" placeholder="Currency">
+        <input name="importance" value="${outcome.importance}" placeholder="Importance">
+        <input name="amount" value="${outcome.amount}" placeholder="Amount">
+        <button>Update</button>
+      </form>
+    </c:if>
   </c:forEach>
 </ul>
+<h3>Add new</h3>
 <form method="post" action="outcomes">
   <input name="name" placeholder="Name">
   <input name="description" placeholder="Description">
