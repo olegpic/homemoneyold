@@ -1,9 +1,9 @@
 package com.virtualpairprogrammers.servlet;
 
 import com.virtualpairprogrammers.data.DefaultDAO;
-import com.virtualpairprogrammers.domain.Currency;
-import com.virtualpairprogrammers.domain.Importance;
-import com.virtualpairprogrammers.domain.Outcome;
+import com.virtualpairprogrammers.model.Currency;
+import com.virtualpairprogrammers.model.Importance;
+import com.virtualpairprogrammers.model.Outcome;
 import com.virtualpairprogrammers.helper.ServletHelper;
 
 import javax.servlet.RequestDispatcher;

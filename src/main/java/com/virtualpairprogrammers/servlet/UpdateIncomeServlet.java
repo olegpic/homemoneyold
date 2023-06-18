@@ -2,7 +2,7 @@ package com.virtualpairprogrammers.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.virtualpairprogrammers.data.DefaultDAO;
-import com.virtualpairprogrammers.domain.Income;
+import com.virtualpairprogrammers.model.Income;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

@@ -1,9 +1,9 @@
 package com.virtualpairprogrammers.data;
 
-import com.virtualpairprogrammers.domain.Currency;
-import com.virtualpairprogrammers.domain.Importance;
-import com.virtualpairprogrammers.domain.Income;
-import com.virtualpairprogrammers.domain.Outcome;
+import com.virtualpairprogrammers.model.Currency;
+import com.virtualpairprogrammers.model.Importance;
+import com.virtualpairprogrammers.model.Income;
+import com.virtualpairprogrammers.model.Outcome;
 
 import java.sql.*;
 import java.util.ArrayList;
