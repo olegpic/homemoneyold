@@ -4,5 +4,5 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="servletHelper" class="com.virtualpairprogrammers.helper.ServletHelper"/>
-    <bean id="mainServlet" class="com.virtualpairprogrammers.servlet.MainServlet"/>
+    <bean id="defaultDAO" class="com.virtualpairprogrammers.data.DefaultDAO"/>
 </beans>

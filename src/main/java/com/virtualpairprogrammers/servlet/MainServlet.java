@@ -1,7 +1,8 @@
 package com.virtualpairprogrammers.servlet;
 
 import com.virtualpairprogrammers.helper.ServletHelper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,20 +15,13 @@ import java.io.IOException;
 @WebServlet("/")
 public class MainServlet extends HttpServlet {
 
-    private ServletHelper helper;
+    private ServletHelper servletHelper;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        helper.populateModel(request);
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
+        servletHelper = (ServletHelper) ctx.getBean("servletHelper");
+        servletHelper.populateModel(request);
         RequestDispatcher rd = request.getRequestDispatcher("/main.jsp");
         rd.forward(request, response);
-    }
-
-    public ServletHelper getHelper() {
-        return helper;
-    }
-
-    @Autowired
-    public void setHelper(ServletHelper helper) {
-        this.helper = helper;
     }
 }
