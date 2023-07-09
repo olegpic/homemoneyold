@@ -17,6 +17,7 @@
 
 		<!-- to avoid "[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!" during the build-->
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<spring.version>5.3.28</spring.version>
 	</properties>
 
 	<dependencies>
