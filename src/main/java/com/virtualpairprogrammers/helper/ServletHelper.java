@@ -1,6 +1,6 @@
 package com.virtualpairprogrammers.helper;
 
-import com.virtualpairprogrammers.dao.IncomeDAO;
+import com.virtualpairprogrammers.repository.IncomeDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.ui.Model;

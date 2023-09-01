@@ -1,4 +1,4 @@
-package com.virtualpairprogrammers.dao;
+package com.virtualpairprogrammers.repository;
 
 import com.virtualpairprogrammers.model.Income;
 
