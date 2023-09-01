@@ -8,25 +8,25 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:component-scan base-package="com.virtualpairprogrammers.controller"/>
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+<!--    <tx:annotation-driven transaction-manager="transactionManager"/>-->
     <mvc:annotation-driven/>
 
     <bean id="mssqlDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
         <property name="url" value="jdbc:sqlserver://localhost:1433;DatabaseName=HomeMoney;encrypt=true;trustServerCertificate=true"/>
         <property name="username" value="sa"/>
-        <property name="password" value="Ssanchez01A"/>
+        <property name="password" value="password"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="mssqlDataSource"/>
     </bean>
 
-    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="dataSource" ref="mssqlDataSource"/>
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
+<!--    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">-->
+<!--        <property name="dataSource" ref="mssqlDataSource"/>-->
+<!--        <property name="sessionFactory" ref="sessionFactory"/>-->
+<!--    </bean>-->
 
     <bean id="servletHelper" class="com.virtualpairprogrammers.helper.ServletHelper"/>
-    <bean id="incomeDAO" class="com.virtualpairprogrammers.dao.DefaultIncomeDAO"/>
+    <bean id="incomeDAO" class="com.virtualpairprogrammers.repository.DefaultIncomeDAO"/>
 </beans>
