@@ -1,21 +1,20 @@
 package com.virtualpairprogrammers.helper;
 
-import com.virtualpairprogrammers.data.DefaultDAO;
+import com.virtualpairprogrammers.dao.IncomeDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.ui.Model;
 
 public class ServletHelper {
 
-    private DefaultDAO dao;
+    private IncomeDAO incomeDAO;
 
-    public void populateModel(HttpServletRequest request) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
-        dao = (DefaultDAO) ctx.getBean("defaultDAO");
-        request.setAttribute("income", "TestIncomeValue");
-        request.setAttribute("incomes", dao.findAllIncomes());
-        request.setAttribute("outcomes", dao.findAllOutcomes());
-        request.setAttribute("outcome", "TestOutcomeValue");
+    public void populateModel(Model model) {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        incomeDAO = (IncomeDAO) ctx.getBean("incomeDAO");
+        model.addAttribute("income", "TestIncomeValue");
+        model.addAttribute("incomes", incomeDAO.findAll());
+        model.addAttribute("outcomes", incomeDAO.findAll());
+        model.addAttribute("outcome", "TestOutcomeValue");
     }
 }

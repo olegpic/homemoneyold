@@ -1,22 +1,48 @@
 package com.virtualpairprogrammers.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Income")
 public class Income {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "income_id")
     private int id;
-    private String name;
-    private String description;
-    private Currency currency;
+
+    @Column(name = "category_id")
+    private Category category;
+
+    @Column(name = "amount")
     private double amount;
 
-	public Income(int id, String name, String description, Currency currency, double amount) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.currency = currency;
-		this.amount = amount;
-	}
+    @Column(name = "currency_id")
+    private Currency currency;
 
-	public Income() {
-	}
+    @Column(name = "active")
+    private boolean active;
+
+    public Income() {
+    }
+
+    public Income(Category category, double amount, Currency currency, boolean active) {
+        this.category = category;
+        this.amount = amount;
+        this.currency = currency;
+        this.active = active;
+    }
+
+    //////////////////////////////
+    //
+    // Getters and Setters
+    //
+    //////////////////////////////
 
     public int getId() {
         return id;
@@ -26,20 +52,20 @@ public class Income {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public String getDescription() {
-        return description;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public Currency getCurrency() {
@@ -50,11 +76,11 @@ public class Income {
         this.currency = currency;
     }
 
-    public double getAmount() {
-        return amount;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
