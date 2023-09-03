@@ -7,7 +7,7 @@
 	<artifactId>homemoneyold</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>homemomeyold</name>
+	<name>homemoneyold</name>
 	<description>Home Money old implementation</description>
 
 	<properties>
@@ -15,7 +15,7 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 
-		<!-- to avoid "[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!" during the build-->
+<!-- 	to avoid "[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!" during the build-->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<spring.version>6.0.10</spring.version>
@@ -32,7 +32,6 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>3.1.1</version>
 		</dependency>
-<!--		Have it in Tomcat-->
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
@@ -49,21 +48,20 @@
 			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-
-		<!--		Hibernate dependency is used for het and implementation of JPA -->
+<!--	Hibernate dependency is used for het and implementation of JPA -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>6.2.5.Final</version>
 		</dependency>
-<!--		Jakarta dependency is used for JPA Specification -->
+<!--	Jakarta's dependency is used for JPA Specification -->
 		<dependency>
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-<!--		MSSQL dependency is used for the application to connect and work with the Sql Server -->
-<!--		Runtime scope because we don't need it on the compile phase -->
+<!--	MSSQL dependency is used for the application to connect and work with the Sql Server -->
+<!--	Runtime scope because we don't need it on the compile phase -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
