@@ -4,6 +4,10 @@
   Date: 5/9/2023
   Time: 2:23 PM
   To change this template use File | Settings | File Templates.
+
+  Excepts parameters:
+  - incomes: list of incomes from the Controller
+  - outcomes: list of outcomes from the Controller
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
@@ -16,18 +20,14 @@
 <ul>
   <c:forEach items="${incomes}" var="income">
     <p>
-      <input name="name" value="${income.name}" placeholder="Name">
-      <input name="description" value="${income.description}" placeholder="Description">
       <input name="currency" value="${income.currency}" placeholder="Currency">
       <input name="amount" value="${income.amount}" placeholder="Amount">
-      <button onclick="updateIncome('${income.id}', '${income.name}', '${income.description}', '${income.currency}', '${income.amount}')">Update</button>
+      <button onclick="updateIncome('${income.id}', '${income.currency}', '${income.amount}')">Update</button>
     </p>
   </c:forEach>
 </ul>
 <h3>Add new</h3>
 <form method="post" action="incomes">
-  <input name="name" placeholder="Name">
-  <input name="description" placeholder="Description">
   <input name="currency" placeholder="Currency">
   <input name="amount" placeholder="Amount">
   <button>Add</button>
