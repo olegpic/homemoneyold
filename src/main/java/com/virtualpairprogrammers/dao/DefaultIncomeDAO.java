@@ -1,4 +1,4 @@
-package com.virtualpairprogrammers.repository;
+package com.virtualpairprogrammers.dao;
 
 import com.virtualpairprogrammers.model.Income;
 import jakarta.persistence.TypedQuery;
@@ -15,12 +15,8 @@ import java.util.List;
 @Repository
 public class DefaultIncomeDAO implements IncomeDAO{
 
-//    private SessionFactory sessionFactory;
-
     @Override
     public List<Income> findAll() {
-//        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-//        sessionFactory = (SessionFactory) ctx.getBean("sessionFactory");
         Configuration configuration = new Configuration();
         configuration.configure();
 
@@ -42,11 +38,4 @@ public class DefaultIncomeDAO implements IncomeDAO{
     //
     //////////////////////////////
 
-//    public SessionFactory getSessionFactory() {
-//        return sessionFactory;
-//    }
-//
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
 }
