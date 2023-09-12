@@ -1,63 +1,59 @@
 package com.virtualpairprogrammers.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity(name = "Outcome")
 public class Outcome {
-    private int id;
-    private String name;
-    private String description;
-    private Currency currency;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "outcome_id")
+    private long id;
+
+    @ManyToOne
+    @JoinColumn(name = "importance_id")
     private Importance importance;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @Column(name = "outcome_amount")
     private double amount;
 
-	public Outcome(int id, String name, String description, Currency currency, Importance importance, double amount) {
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.importance = importance;
-		this.currency = currency;
-		this.amount = amount;
-	}
+    @ManyToOne
+    @JoinColumn(name = "currency_id")
+    private Currency currency;
 
-	public Outcome() {
-	}
+    @Column
+    private boolean active;
 
-    public int getId() {
-        return id;
+    public Outcome() {
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-	public Importance getCategory() {
-		return importance;
-	}
-
-	public void setCategory(Importance importance) {
-		this.importance = importance;
-	}
-
-	public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
+    public Outcome(Importance importance, Category category, double amount, Currency currency, boolean active) {
+        this.importance = importance;
+        this.category = category;
+        this.amount = amount;
         this.currency = currency;
+        this.active = active;
+    }
+
+    //////////////////////////////
+    //
+    // Getters and Setters
+    //
+    //////////////////////////////
+
+
+    public long getId() {
+        return id;
     }
 
     public Importance getImportance() {
@@ -68,6 +64,14 @@ public class Outcome {
         this.importance = importance;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public double getAmount() {
         return amount;
     }
@@ -76,7 +80,19 @@ public class Outcome {
         this.amount = amount;
     }
 
-    public String toString() {
-        return (this.name + " (" + this.amount + ")");
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

@@ -16,7 +16,12 @@
         <property name="show_sql">true</property>
 
         <!-- entities mappings -->
+        <mapping class="com.virtualpairprogrammers.model.Category"/>
+        <mapping class="com.virtualpairprogrammers.model.CategoryType"/>
+        <mapping class="com.virtualpairprogrammers.model.Currency"/>
+        <mapping class="com.virtualpairprogrammers.model.Importance"/>
         <mapping class="com.virtualpairprogrammers.model.Income"/>
+        <mapping class="com.virtualpairprogrammers.model.Outcome"/>
     </session-factory>
 
 </hibernate-configuration>

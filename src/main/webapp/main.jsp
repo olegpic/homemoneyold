@@ -20,7 +20,8 @@
 <ul>
   <c:forEach items="${incomes}" var="income">
     <p>
-      <input name="currency" value="${income.currency}" placeholder="Currency">
+      <input name="category" value="${income.category.name}" placeholder="Category">
+      <input name="currency" value="${income.currency.symbol}" placeholder="Currency">
       <input name="amount" value="${income.amount}" placeholder="Amount">
       <button onclick="updateIncome('${income.id}', '${income.currency}', '${income.amount}')">Update</button>
     </p>

@@ -5,32 +5,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
-@Entity(name = "Category")
-public class Category {
+@Entity(name = "CategoryType")
+public class CategoryType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
+    @Column(name = "category_type_id")
     private long id;
 
-    @Column(name = "category_name")
+    @Column(name = "category_type_name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "category_type_id")
-    private CategoryType type;
-
-	@Column
+    @Column
     private boolean active;
 
-    public Category() {
+    public CategoryType() {
     }
 
-    public Category(String name, CategoryType type, boolean active) {
+    public CategoryType(String name, boolean active) {
         this.name = name;
-        this.type = type;
         this.active = active;
     }
 
@@ -51,14 +45,6 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public CategoryType getType() {
-        return type;
-    }
-
-    public void setType(CategoryType type) {
-        this.type = type;
     }
 
     public boolean isActive() {

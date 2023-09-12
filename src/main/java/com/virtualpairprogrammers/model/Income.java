@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,16 +18,19 @@ public class Income {
     @Column(name = "income_id")
     private int id;
 
-    @Column(name = "category_id")
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
-    @Column(name = "amount")
+    @Column(name = "income_amount")
     private double amount;
 
-    @Column(name = "currency_id")
+    @ManyToOne
+    @JoinColumn(name = "currency_id")
     private Currency currency;
 
-    @Column(name = "active")
+    @Column
     private boolean active;
 
     public Income() {
@@ -46,10 +51,6 @@ public class Income {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Category getCategory() {
